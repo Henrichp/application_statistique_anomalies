@@ -22,30 +22,59 @@ class GraphiquesController extends Controller
     public function recherche(Request $request)
     {
         $cote = $request->cote;
-        //print_r($cote);
+        $alldata = $this->afficherGraphique($cote);
 
-        /*
-        $userfound = User::where('id', '<>', $userme->id)
-            ->Where(function ($query) use ($cote) {
-                $query->where('nom', 'LIKE', '%' . $prenom . '%')
-                    ->orWhere('email', 'LIKE', '%' . $prenom . '%')
-                    ->orWhere('prenom', 'LIKE', '%' . $prenom . '%');
-            })
-            ->get();*/
+        return view('cotes_graphiques')
+            ->with('data',json_encode($alldata[0],JSON_NUMERIC_CHECK))
+            ->with('moyenne',json_encode($alldata[1],JSON_NUMERIC_CHECK))
+            ->with('sigma_sup',json_encode($alldata[2],JSON_NUMERIC_CHECK))
+            ->with('sigma_inf',json_encode($alldata[3],JSON_NUMERIC_CHECK))
+            ->with('categories',json_encode($alldata[4],JSON_NUMERIC_CHECK))
+            ->with('cote',$cote);
+
+    }
+
+    public function boutGraphique($cote)
+    {
+        $cote = $cote;
+        $alldata = $this->afficherGraphique($cote);
+
+        return view('cotes_graphiques')
+            ->with('data',json_encode($alldata[0],JSON_NUMERIC_CHECK))
+            ->with('moyenne',json_encode($alldata[1],JSON_NUMERIC_CHECK))
+            ->with('sigma_sup',json_encode($alldata[2],JSON_NUMERIC_CHECK))
+            ->with('sigma_inf',json_encode($alldata[3],JSON_NUMERIC_CHECK))
+            ->with('categories',json_encode($alldata[4],JSON_NUMERIC_CHECK))
+            ->with('cote',$cote);
+
+    }
+
+    public function index()
+    {
+
+        //cote affiché par défaut
+        $cote = "AAL";
+        $alldata = $this->afficherGraphique($cote);
+
+        return view('cotes_graphiques')
+            ->with('data',json_encode($alldata[0],JSON_NUMERIC_CHECK))
+            ->with('moyenne',json_encode($alldata[1],JSON_NUMERIC_CHECK))
+            ->with('sigma_sup',json_encode($alldata[2],JSON_NUMERIC_CHECK))
+            ->with('sigma_inf',json_encode($alldata[3],JSON_NUMERIC_CHECK))
+            ->with('categories',json_encode($alldata[4],JSON_NUMERIC_CHECK))
+            ->with('cote',$cote);
+
+    }
+
+
+    public function afficherGraphique($cote){
 
         $data = array();
         $moy = array();
         $categories = array();
         $sigma_sup = array();
         $sigma_inf = array();
-
-        /*$dataQuery = DB::table('bourse_stats.historique AS h')
-            ->join ('bourse_stats.historique_stats AS h_stats', 'h_stats.s_cote', '=' , 'h.cote')
-            ->select("h.jour","h.fermeture","h_stats.moyenne","h_stats.sigma")
-            ->orderBy('h.jour')
-            ->where('h.cote',$cote)
-            ->whereraw("h_stats.s_jour <= h.jour")
-            ->get();*/
+        $alldata = array();
 
         $dataQuery = DB::select("SELECT DISTINCT ON (h.jour) h.jour, h.fermeture, h_stats.moyenne, h_stats.sigma  
                                 FROM bourse_stats.historique AS h
@@ -55,7 +84,6 @@ class GraphiquesController extends Controller
                                 AND h.cote = '$cote'
                                 ORDER BY h.jour DESC,h_stats.s_jour DESC;");
 
-
         foreach ($dataQuery as $key => $value){
 
             array_unshift($data , [$value->jour,$value->fermeture]);
@@ -64,60 +92,16 @@ class GraphiquesController extends Controller
             array_unshift($sigma_inf , [$moy[0][1]-$value->sigma]);
             array_unshift($categories , $value->jour);
 
-            /*$data[$key] = [$value->jour,$value->fermeture];
-            $moy[$key] = [$value->jour,$value->moyenne];
-            $sigma_sup[$key] = [$moy[$key][1]+$value->sigma];
-            $sigma_inf[$key] = [$moy[$key][1]-$value->sigma];
-            $categories[$key] = $value->jour;*/
         }
+        array_push($alldata, $data);
+        array_push($alldata, $moy);
+        array_push($alldata, $sigma_sup);
+        array_push($alldata, $sigma_inf);
+        array_push($alldata, $categories);
 
-        return view('cotes_graphiques')
-            ->with('data',json_encode($data,JSON_NUMERIC_CHECK))
-            ->with('categories',json_encode($categories,JSON_NUMERIC_CHECK))
-            ->with('moyenne',json_encode($moy,JSON_NUMERIC_CHECK))
-            ->with('sigma_sup',json_encode($sigma_sup,JSON_NUMERIC_CHECK))
-            ->with('sigma_inf',json_encode($sigma_inf,JSON_NUMERIC_CHECK))
-            ->with('cote',$cote);
+        return $alldata;
 
     }
-
-
-    public function index()
-    {
-        $data = array();
-        $moy = array();
-        $categories = array();
-        $sigma_sup = array();
-        $sigma_inf = array();
-
-        //cote affiché par défaut
-        $cote = 'A';
-
-        $dataQuery = DB::table('bourse_stats.historique AS h')
-            ->join ('bourse_stats.historique_stats AS h_stats', 'h_stats.s_cote', '=' , 'h.cote')
-            ->select("h.jour","h.fermeture","h_stats.moyenne","h_stats.sigma")
-            ->orderBy('h.jour')
-            ->where('h.cote','A')
-            ->get();
-
-        foreach ($dataQuery as $key => $value){
-            $data[$key] = [$value->jour,$value->fermeture];
-            $moy[$key] = [$value->jour,$value->moyenne];
-            $sigma_sup[$key] = [$moy[$key][1]+$value->sigma];
-            $sigma_inf[$key] = [$moy[$key][1]-$value->sigma];
-            $categories[$key] = $value->jour;
-        }
-
-        return view('cotes_graphiques')
-            ->with('data',json_encode($data,JSON_NUMERIC_CHECK))
-            ->with('categories',json_encode($categories,JSON_NUMERIC_CHECK))
-            ->with('moyenne',json_encode($moy,JSON_NUMERIC_CHECK))
-            ->with('sigma_sup',json_encode($sigma_sup,JSON_NUMERIC_CHECK))
-            ->with('sigma_inf',json_encode($sigma_inf,JSON_NUMERIC_CHECK))
-            ->with('cote',$cote);
-    }
-
-
 
 
 }

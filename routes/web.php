@@ -18,7 +18,8 @@ Route::get('/', function () {
 // Route pour l'affichage initiale des cotes boursière
 
 Route::get('cotes_graphiques', 'GraphiquesController@index');
-Route::get('/home', 'GraphiquesController@index');
+Route::get('cote_graphique/{cote_id}', 'GraphiquesController@boutGraphique');
+Route::get('home', 'GraphiquesController@index');
 Route::post('recherche', 'GraphiquesController@recherche');
 
 Auth::routes();
@@ -27,12 +28,13 @@ Route::get('login',function () {
     return view('auth.login');
 });
 
-Route::get('/users/serverSide', [
+Route::get('users/serverSide', [
     'as'   => 'users.serverSide',
     'uses' => function () {
-        $users = DB::table('bourse_stats.anomalies')->select("jour","cote","type_anomalie","valeur");
-
-        return Datatables::of($users)->make();
+        $anomalies = DB::table('bourse_stats.anomalies')
+            ->select("jour","cote","type_anomalie","valeur")
+            ->orderBy("jour","cote");
+        return Datatables::of($anomalies)->make();
     }
 ]);
 

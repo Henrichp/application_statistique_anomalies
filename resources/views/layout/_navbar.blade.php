@@ -29,8 +29,6 @@
                         Pascal Henrichon<span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ url('/profil') }}">Profil</a></li>
-                        <li><a href="{{ url('/notifications') }}">Notifications</a></li>
                         <li><a href="{{ url('/deconnexion') }}">Déconnexion</a></li>
                     </ul>
                 </li>

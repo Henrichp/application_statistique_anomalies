@@ -317,27 +317,55 @@
 
     <div class="col-md-12">
       <div id="container"></div>
-      <table class="datatable">
-        <thead>
-        <tr>
-          <th>Jour</th>
-          <th>Cote</th>
-          <th>Type d'anomalie</th>
-          <th>Valeur en anomalie</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-      <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+      <div>
+        <table id="dat" class="datatable" style="width:100%">
+          <thead>
+          <tr>
+            <th>Jour</th>
+            <th>Cote</th>
+            <th>Type d'anomalie</th>
+            <th>Valeur en anomalie</th>
+          </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+
+      <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
       <script>
         $(document).ready(function(){
-          $('.datatable').DataTable({
+          var table = $('#dat').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ route('users.serverSide') }}'
+            ajax: '{{ route('users.serverSide') }}',
+            oSearch: {"sSearch": "{{$cote}}"}
+            /*columnDefs: [ {
+            "targets": -1,
+            "data": null,
+            "defaultContent": "<button>Afficher</button>"
+          } ],*/
+
           });
+
+          //https://datatables.net/examples/ajax/null_data_source.html
+          /*$('#dat tbody').on( 'click', 'button', function () {
+            var dataTab = table.row( $(this).parents('tr') ).data();
+            var cote = dataTab[1];
+            {{--URL::route('cote_graphique/', array('cote_id' => "AA"))--}}
+            {{--App::make(GraphiquesController)->boutGraphique(dataTab[1])--}}
+            } );*/
         });
+
+        //var oTable = $('#dat').dataTable();
+        /*$(oTable.fnGetNodes()).on("mouseover", function (event) {
+          $(this).closest('table').find('button#add_button').remove();
+          var $button = $("").text("Add");
+          $($button).on("click", function(event){alert("hello");});
+          $(this).append($button);
+        });*/
+
+
       </script>
     </div>
 
