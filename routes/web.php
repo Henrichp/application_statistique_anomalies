@@ -18,7 +18,6 @@ Route::get('/', function () {
 // Route pour l'affichage initiale des cotes boursière
 
 Route::get('cotes_graphiques', 'GraphiquesController@index');
-Route::get('cote_graphique/{cote_id}', 'GraphiquesController@boutGraphique');
 Route::get('home', 'GraphiquesController@index');
 Route::post('recherche', 'GraphiquesController@recherche');
 
