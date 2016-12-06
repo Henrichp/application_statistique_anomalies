@@ -37,7 +37,7 @@ return [
     | application. If disabled, a simple generic error page is shown.
     |
     */
-
+	/*test*/
     'debug' => env('APP_DEBUG', true),
 
     /*
