@@ -46,12 +46,12 @@ return [
 	
 	/*parametres de connexion a la BD Heroku*/
 	
-	$url = parse_url(getenv("DATABASE_URL"));
+	/*$url = parse_url(getenv("DATABASE_URL"));
 
 	$host = $url["host"];
 	$username = $url["user"];
 	$password = $url["pass"];
-	$database = substr($url["path"], 1);
+	$database = substr($url["path"], 1);*/
 
     'connections' => [
 
@@ -77,10 +77,10 @@ return [
 
         'pgsql' => [
             'driver'   => 'pgsql',
-			'host'     => $host,
-			'database' => $database,
-			'username' => $username,
-			'password' => $password,
+			'host'     => 'ec2-54-243-253-17.compute-1.amazonaws.com',
+			'database' => 'de7kdo2lp4ac8g',
+			'username' => 'betzxkmlghvnnf',
+			'password' => 's3WtIwRcfHhLdLcTogqi20I8N5',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema' => 'bourse_stats',
