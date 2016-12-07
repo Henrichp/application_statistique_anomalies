@@ -3,13 +3,13 @@
 
   @include('layout._head')
 
-<body class="login">
+<body class="background-image">
 
   <div id="content">
     <div class="container-fluid">
       <div class="table-pricing-3">
         <ul class="list-unstyled">
-          <li class="col-md-3">
+          <span class="col-md-3" ></span >
           <li class="col-md-6">
             <div class="innerAll">
               <h1>Application d'affichage statistique d'anomalies</h1>
@@ -25,7 +25,7 @@
               </div>
             </div>
           </li>
-          <li class="col-md-3">
+          <span class="col-md-3"></span >
          </ul>
       </div>
     </div>

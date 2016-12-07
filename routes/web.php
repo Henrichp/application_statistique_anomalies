@@ -27,6 +27,10 @@ Route::get('login',function () {
     return view('auth.login');
 });
 
+Route::get('/password/request',function () {
+    return view('auth.login');
+});
+
 Route::get('users/serverSide', [
     'as'   => 'users.serverSide',
     'uses' => function () {

@@ -86,7 +86,7 @@ return [
 			'schema' => 'bourse_stats',
             'sslmode' => 'prefer'
         ],
-		/*
+    /*
 		'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', 'localhost'),

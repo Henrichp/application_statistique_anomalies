@@ -100,6 +100,11 @@
 .timeline-appointments > ul > li:first-of-type .dot {
   top: 24px;
 }
+.background-image {
+  position: initial;
+  background: url('../../images/background.jpg');
+  padding-top: 0;
+}
 .login {
   margin: 0 auto;
 }

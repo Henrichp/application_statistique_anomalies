@@ -9,4 +9,5 @@
   <link href="{{ URL::asset('css/vendor/all.css') }}" rel="stylesheet">
   <link href="{{ URL::asset('css/app/app.css') }}" rel="stylesheet">
   <link href="{{ URL::asset('//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+  <link href="{{ URL::asset('//cdn.datatables.net/buttons/1.2.3/css/buttons.dataTables.min.css') }}" rel="stylesheet">
 </head>

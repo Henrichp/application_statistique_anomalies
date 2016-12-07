@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/cotes_graphique');
+            return redirect('/cotes_graphiques');
         }
 
         return $next($request);
