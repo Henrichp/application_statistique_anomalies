@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //http://stackoverflow.com/questions/28402726/laravel-5-redirect-to-https
         // Stan the man!
-        //\URL::forceSchema('https');
+        \URL::forceSchema('https');
     }
 
     /**
