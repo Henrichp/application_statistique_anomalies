@@ -5,12 +5,13 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
                 <span class="sr-only">Afficher le menu</span>
             </button>
-            <a class="navbar-brand navbar-brand-primary">Anomstats</a>
+            <a class="navbar-brand navbar-brand-primary">AnomStats</a>
         </div>
         <div class="collapse navbar-collapse" id="main-nav">
             <form class="navbar-form navbar-left hidden-xs" role="search" action="recherche" method="post">
                 <div class="search-2">
                     <div class="input-group">
+                        {{--{!! Form::text('search_text', null, array('placeholder' => 'Search Text','class' => 'form-control','id'=>'search_text')) !!}--}}
                         <input type="text" class="form-control form-control-w-150" name="cote" placeholder="Trouver une cote">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <span class="input-group-btn">

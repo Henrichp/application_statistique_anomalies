@@ -41,4 +41,8 @@ Route::get('users/serverSide', [
     }
 ]);
 
+/*
+Route::get('autocomplete',array('as'=>'autocomplete','uses'=>'AutoCompleteController@index'));
+Route::get('searchajax',array('as'=>'searchajax','uses'=>'AutoCompleteController@autoComplete'));
+*/
 

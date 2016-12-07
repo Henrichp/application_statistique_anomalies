@@ -74,7 +74,7 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-
+        /*
         'pgsql' => [
             'driver'   => 'pgsql',
 			'host'     => 'ec2-54-243-253-17.compute-1.amazonaws.com',
@@ -85,8 +85,8 @@ return [
 			'prefix'   => '',
 			'schema' => 'bourse_stats',
             'sslmode' => 'prefer'
-        ],
-    /*
+        ],*/
+
 		'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', 'localhost'),
@@ -98,7 +98,7 @@ return [
             'prefix' => '',
             'schema' => 'bourse_stats',
             'sslmode' => 'prefer',
-        ],*/
+        ],
 
 
     ],

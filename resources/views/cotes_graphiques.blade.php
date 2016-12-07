@@ -319,16 +319,7 @@
       <div id="container"></div>
       <div>
         <table id="dat" class="datatable" style="width:100%">
-          <thead>
-          <tr>
-            <th>Jour</th>
-            <th>Cote</th>
-            <th>Type d'anomalie</th>
-            <th>Valeur en anomalie</th>
-          </tr>
-          </thead>
-          <tbody>
-          </tbody>
+
         </table>
       </div>
       <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
@@ -339,6 +330,9 @@
       <script src="//cdn.datatables.net/buttons/1.2.3/js/buttons.html5.min.js"></script>
       <script>
         $(document).ready(function(){
+
+          $('#dat').hide();
+
           var table = $('#dat').DataTable({
             processing: true,
             serverSide: true,
@@ -347,7 +341,13 @@
             dom: 'Bfrtip',
             buttons: [
               'csv', 'excel'
-            ]
+            ],
+            columns:[
+              {sTitle:"Jour"},
+              {sTitle:"Cote"},
+              {sTitle:"Type d'anomalie"}, //this still shows on load
+              {sTitle:"Valeur en anomalie"} //does not show on load
+            ],
             /*columnDefs: [ {
             "targets": -1,
             "data": null,
@@ -355,6 +355,8 @@
           } ],*/
 
           });
+
+          $('#dat').show();
 
           //https://datatables.net/examples/ajax/null_data_source.html
           /*$('#dat tbody').on( 'click', 'button', function () {
@@ -373,6 +375,24 @@
           $(this).append($button);
         });*/
 
+        {{--src = "{{ route('searchajax') }}";
+        $("#search_text").autocomplete({
+          source: function(request, response) {
+            $.ajax({
+              url: src,
+              dataType: "json",
+              data: {
+                term : request.term
+              },
+              success: function(data) {
+                response(data);
+
+              }
+            });
+          },
+          min_length: 3,
+
+        });--}}
 
       </script>
     </div>
