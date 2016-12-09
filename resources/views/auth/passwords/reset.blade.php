@@ -1,6 +1,9 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html class="hide-sidebar ls-bottom-footer" lang="fr">
 
-@section('content')
+@include('layout._head')
+
+<body class="background-image">
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -67,4 +70,6 @@
         </div>
     </div>
 </div>
-@endsection
+@include('layout._footer')
+</body>
+</html>

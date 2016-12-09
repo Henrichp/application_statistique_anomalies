@@ -53,7 +53,7 @@ class GraphiquesController extends Controller
     {
 
         //cote affiché par défaut
-        $cote = "AAL";
+        $cote = "ABG";
         $alldata = $this->afficherGraphique($cote);
 
         return view('cotes_graphiques')

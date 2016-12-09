@@ -36,7 +36,7 @@ Route::get('users/serverSide', [
     'uses' => function () {
         $anomalies = DB::table('bourse_stats.anomalies')
             ->select("jour","cote","type_anomalie","valeur")
-            ->orderBy("jour","cote");
+            ->orderBy("jour","cote",'ASC');
         return Datatables::of($anomalies)->make();
     }
 ]);

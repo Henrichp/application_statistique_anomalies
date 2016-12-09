@@ -6,6 +6,7 @@
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <!--<script src="https://code.highcharts.com/stock/highstock.js"></script>-->
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://highcharts.github.io/export-csv/export-csv.js"></script>
   <script type="text/javascript">
 
     $(function () {
@@ -348,6 +349,7 @@
               {sTitle:"Type d'anomalie"}, //this still shows on load
               {sTitle:"Valeur en anomalie"} //does not show on load
             ],
+            order: [[ 1, "asc" ]],
             /*columnDefs: [ {
             "targets": -1,
             "data": null,
